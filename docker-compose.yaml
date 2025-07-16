@@ -1,0 +1,27 @@
+services:
+  basiccrud:
+    build: ./basicCrud
+    container_name: basiccrud-api
+    environment:
+      - DB_HOST=db
+      - NODE_ENV=production
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:15
+    container_name: user-crud-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data: 
