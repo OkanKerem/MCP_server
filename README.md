@@ -49,8 +49,15 @@ npm run build
 ```
 
 5. Start the MCP server:
+
+**Option A: Standard MCP Server (for n8n/programmatic use):**
 ```bash
 npm start
+```
+
+**Option B: MCP Server with Web Interface (for easy testing):**
+```bash
+npm run start:web
 ```
 
 ## Configuration
@@ -73,7 +80,23 @@ The MCP server runs locally and connects to these services.
 - **POST /messages?sessionId=<id>** - Send MCP JSON-RPC messages
 - **GET /health** - Health check and server status
 
-## Usage with n8n
+## Usage Options
+
+### Option 1: Web Interface (Easy Testing)
+
+When using `npm run start:web`, you can access a beautiful web interface at `http://localhost:8080` that provides:
+
+- **Visual forms** for each CRUD operation
+- **Real-time results** display
+- **Input validation** for TC numbers and age ranges
+- **Color-coded success/error messages**
+- **Responsive design** that works on desktop and mobile
+
+This is perfect for testing the MCP tools and demonstrating functionality.
+
+### Option 2: Programmatic Access (n8n Integration)
+
+When using `npm start`, you get the standard MCP server for programmatic use:
 
 1. Connect to the SSE endpoint: `http://localhost:8080/sse`
 2. Send JSON-RPC messages to: `http://localhost:8080/messages?sessionId=<session_id>`
@@ -111,13 +134,17 @@ The MCP server runs locally and connects to these services.
 
 ### Scripts
 - `npm run build` - Compile TypeScript
-- `npm start` - Start the server
+- `npm start` - Start standard MCP server (for n8n)
+- `npm run start:web` - Start MCP server with web interface
 - `npm test` - Run tests (not implemented)
 
 ### Project Structure
 ```
 ├── src/
-│   └── index.ts          # Main MCP server
+│   ├── index.ts          # Standard MCP server (for n8n)
+│   └── indexNew.ts       # MCP server with web interface
+├── public/
+│   └── index.html        # Web interface for testing tools
 ├── basicCrud/            # BasicCrud API source
 ├── docker-compose.yaml   # Docker services
 ├── Dockerfile           # MCP server container (unused in current setup)

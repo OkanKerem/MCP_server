@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node build/index.js",
+    "start:web": "node build/indexNew.js",
     "start:http": "node build/http-server.js"
   },
   "keywords": [],
